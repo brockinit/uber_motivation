@@ -1,3 +1,6 @@
 standard-app-packages
 iron:router
 standard-minifiers
+accounts-base
+useraccounts:iron-routing
+useraccounts:core
