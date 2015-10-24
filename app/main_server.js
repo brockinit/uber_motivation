@@ -17,6 +17,11 @@ Npm.require;
 Assets;
 require('fs').readFile.call;
 
-console.log('\n\nRunning on server only');
-console.log('There are # posts:', Posts.find().fetch().length);
-console.log('React SSR:', React.renderToString(<App/>));
+
+Meteor.publish("posts", function () {
+  return Posts.find();
+});
+
+// console.log('\n\nRunning on server only');
+// console.log('There are # posts:', Posts.find().fetch().length);
+// console.log('React SSR:', React.renderToString(<App/>));
