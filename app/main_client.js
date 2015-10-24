@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
-import createRoutes from './routes.js';
+import Login from './components/Login.jsx';
 import {Posts} from 'collections';
 
 Accounts.ui.config({
@@ -17,17 +17,11 @@ Meteor.startup(function () {
     action: function() {
       ReactDOM.render(<App />, document.getElementById('root'));
     }
-    // action() {
-    //   console.log('hello');
-    //   ReactLayout.render(MainLayout, {
-    //     content : <App />
-    //   });
-    // }
   });
 
   FlowRouter.route('/login', {
     action: function() {
-      console.log('yup');
+      ReactDOM.render(<Login />, document.getElementById('root'));
     }
   });
 
