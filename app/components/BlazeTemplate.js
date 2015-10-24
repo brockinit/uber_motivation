@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom';
 export default class BlazeTemplate extends React.Component {
   static propTypes = {
     template: React.PropTypes.any.isRequired,
-    component: React.PropTypes.any,
+    component: React.PropTypes.any
   }
   static defaultProps = {
     component: 'div',
