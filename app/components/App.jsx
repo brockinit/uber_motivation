@@ -9,6 +9,20 @@ Meteor.call('sayHello', function(err, res) {
   console.log(res);
 });
 
+//process existing rides on reboot and start the cron
+Meteor.startup(function () {
+  FutureRides.find().forEach(function (ride) {
+    if (ride.date < new Date()) {
+      //call function that pings api to request ride
+    } else {
+      //populate the FutureRides collection on start
+      addRide(ride._id, ride);
+    }
+  });
+  //start the cron
+  SyncedCron.start();
+});
+
 @reactMixin.decorate(ReactMeteorData)
 export default class App extends Component {
   getMeteorData() {
