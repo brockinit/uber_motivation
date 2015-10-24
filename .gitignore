@@ -1,4 +1,4 @@
+node_modules/
 dist
-node_modules
-npm-debug.log
 /webpack/lib
+npm-debug.log
