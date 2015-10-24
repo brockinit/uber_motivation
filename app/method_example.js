@@ -12,7 +12,7 @@ Meteor.methods({
   //method for scheduling uber ride.
   //  needs to be linked to calendar
   addRide (id, details) {
-    Synced.Cron.add({
+    SyncedCron.add({
       name : id,
       schedule : function (parser) {
         return parser.recur().on(details.date).fullDate();
@@ -37,7 +37,7 @@ Meteor.methods({
     if (details.date < new Date()) {
       //function that pings uber api to request ride (boots/manny)
     } else {
-      //insert ride infor into FutureRides collection
+      //insert ride info into FutureRides collection
       var thisId = FutureRides.insert(details);
       addRide(thisId, details);
     }

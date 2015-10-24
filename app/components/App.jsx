@@ -2,25 +2,12 @@
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
-import {Users, Posts} from 'collections';
+import {Users, Posts, FutureRides} from 'collections';
 import './App.css';
 
+//sanity check function
 Meteor.call('sayHello', function(err, res) {
   console.log(res);
-});
-
-//process existing rides on reboot and start the cron
-Meteor.startup(function () {
-  FutureRides.find().forEach(function (ride) {
-    if (ride.date < new Date()) {
-      //call function that pings api to request ride
-    } else {
-      //populate the FutureRides collection on start
-      addRide(ride._id, ride);
-    }
-  });
-  //start the cron
-  SyncedCron.start();
 });
 
 @reactMixin.decorate(ReactMeteorData)
