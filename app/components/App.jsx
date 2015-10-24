@@ -13,14 +13,14 @@ Meteor.call('sayHello', function(err, res) {
 export default class App extends Component {
   getMeteorData() {
     return {
-      users: Users.find().fetch(),
-      posts: Posts.find().fetch()
+      users : Users.find().fetch(),
+      posts : Posts.find().fetch()
     };
   }
 
   render() {
     // Template does not suppor server side
-    let _Template = typeof(Template) === 'function' ? Template : {
+    let _Template = typeof (Template) === 'function' ? Template : {
       loginButtons : 'any'
     };
     let userCount = Users.find().fetch().length;

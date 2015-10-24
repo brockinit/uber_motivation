@@ -18,9 +18,14 @@ Assets;
 require('fs').readFile.call;
 
 
-Meteor.publish("posts", function () {
+Meteor.publish('posts', function () {
   return Posts.find();
 });
+
+Meteor.publish('futureRides', function () {
+  return FutureRides.find();
+});
+
 
 // console.log('\n\nRunning on server only');
 // console.log('There are # posts:', Posts.find().fetch().length);
