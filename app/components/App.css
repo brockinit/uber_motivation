@@ -4,6 +4,7 @@ body {
   font-family: 'Lato', sans-serif;
   font-size: 16px;
   background: #09091A;
+  background: linear-gradient(90deg, #09091A 10%, #0F0F25 90%);
   color: #fff;
 }
 
