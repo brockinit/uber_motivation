@@ -21,6 +21,7 @@ export default class App extends Component {
 
   handleAuth() {
     return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
+  }
 
   handleScheduleRide() {
     let details = { date : new Date((this.refs.dateInput).value) };
@@ -32,6 +33,9 @@ export default class App extends Component {
   }
 
   render() {
+    let _Template = typeof (Template) === 'function' ? Template : {
+      loginButtons : 'any'
+    };
 
     let userCount = Users.find().fetch().length;
     let postsCount = Posts.find().fetch().length;

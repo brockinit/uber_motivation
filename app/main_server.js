@@ -4,6 +4,7 @@ import {Posts, FutureRides, Tasks} from './collections';
 import {createPosts, createUsers} from './fixtures';
 // we don't call this so we're just importing to initialize file
 import './method_example';
+import './api.js';
 
 // these will only run on the sever since we only 'import' them in main_server.js
 
