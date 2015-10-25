@@ -13,7 +13,6 @@ export default class Calendar extends Component {
   }
 
   componentDidMount() {
-    // scheduler.config.xml_date
     scheduler.init('scheduler_here', new Date());
     scheduler.meteor(Tasks.find({}), Tasks);
  }

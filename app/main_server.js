@@ -34,6 +34,12 @@ Meteor.publish('tasks', function() {
 Tasks.allow({
   'insert' : function (u, d) {
     return true;
+  },
+  'update' : function (u, d) {
+    return true;
+  },
+  'remove' : function (u, d) {
+    return true;
   }
 });
 
