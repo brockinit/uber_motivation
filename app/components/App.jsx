@@ -20,7 +20,7 @@ export default class App extends Component {
   }
 
   handleAuth() {
-    return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
+    return window.open('https://login.uber.com/oauth/v2/authorize?client_id=eVsjM4L5repfO6oBG3ibyFXZMbeRtx2F&response_type=code&scope=request%20profile');
   }
 
   render() {
