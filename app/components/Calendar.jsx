@@ -1,14 +1,13 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
-import {Users, Posts, FutureRides} from 'collections';
+import {Users, FutureRides} from 'collections';
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Calendar extends Component {
   getMeteorData() {
     return {
-      users : Users.find().fetch(),
-      posts : Posts.find().fetch()
+      users : Users.find().fetch()
     };
   }
 
