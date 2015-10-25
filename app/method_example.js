@@ -53,7 +53,7 @@ Meteor.methods({
   scheduleRide(details) {
     if (details.start_date <= new Date()) {
       //ping api
-      console.log('woooo');
+      // console.log('woooo');
     } else {
       //insert ride info into FutureRides collection
       console.log('bootsnpants');

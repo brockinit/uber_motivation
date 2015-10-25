@@ -1,9 +1,7 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
-import nodeGeocoder from 'node-geocoder';
 import reactMixin from 'react-mixin';
 import {Users, Posts, FutureRides} from 'collections';
-
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Calendar extends Component {
@@ -15,9 +13,6 @@ export default class Calendar extends Component {
   }
 
   componentDidMount() {
-    let geocoderProvider = 'google';
-    let httpAdapter = 'http';
-    let geocoder = nodeGeocoder(geocoderProvider, httpAdapter);
 
     scheduler.init('scheduler_here', new Date());
     scheduler.meteor(FutureRides.find({}), FutureRides);
@@ -29,19 +24,30 @@ export default class Calendar extends Component {
       return true;
     });
 
+    var geocoder = new google.maps.Geocoder();
     scheduler.attachEvent('onEventSave', function (id, e) {
       scheduler.getEvent(id).userId = Meteor.userId();
       scheduler.updateEvent(id);
-      let start_result = geocoder.geocode(scheduler.getEvent(id).startAddress);
-      let st_lon = start_result.latitude;
-      let st_lat = start_result.longitude;
-
-      console.log(st_lon, st_lat);
-
-      let details = scheduler.getEvent(id);
-      Meteor.call('scheduleRide', details, function (err, res) {
-       if (err) { throw new err; }
-        console.log(res);
+      let details = FutureRides.findOne({ 'id' : id });
+      geocoder.geocode({'address' :scheduler.getEvent(id).startAddress}, function (results, status) {
+        FutureRides.update(details._id, {$set : { start_lat : results[0].geometry.location.lat() } });
+        FutureRides.update(details._id, {$set : { start_lng : results[0].geometry.location.lng() } });
+        if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
+          debugger;
+          Meteor.call('scheduleRide', details, function (err, res) {
+           if (err) { throw new err; }
+          });
+        }
+      });
+      geocoder.geocode({'address' : scheduler.getEvent(id).endAddress}, function (results, status) {
+        FutureRides.update(details._id, {$set : { end_lat : results[0].geometry.location.lat() } });
+        FutureRides.update(details._id, {$set : { end_lng : results[0].geometry.location.lng() } });
+        if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
+          debugger;
+          Meteor.call('scheduleRide', details, function (err, res) {
+           if (err) { throw new err; }
+          });
+        }
       });
       return true;
     });

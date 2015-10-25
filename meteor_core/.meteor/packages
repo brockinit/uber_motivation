@@ -27,4 +27,5 @@ kadira:flow-router
 percolate:synced-cron
 dhtmlx:scheduler
 dhtmlx:scheduler-data
-aldeed:geocoder
+mrt:geo
+ianng:leaflet-control-geocoder
