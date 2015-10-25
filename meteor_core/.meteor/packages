@@ -26,3 +26,5 @@ http
 kadira:flow-router
 percolate:synced-cron
 
+dhtmlx:scheduler
+dhtmlx:scheduler-data

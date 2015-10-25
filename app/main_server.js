@@ -1,6 +1,6 @@
 import React from 'react';
 import App from './components/App.jsx';
-import {Posts, FutureRides} from './collections';
+import {Posts, FutureRides, Tasks} from './collections';
 import {createPosts, createUsers} from './fixtures';
 // we don't call this so we're just importing to initialize file
 import './method_example';
@@ -26,7 +26,19 @@ Meteor.publish('FutureRides', function () {
   return FutureRides.find();
 });
 
+Meteor.publish('tasks', function() {
+  return Tasks.find();
+});
+
+// temporary insecure allowance
+Tasks.allow({
+  'insert' : function (u, d) {
+    return true;
+  }
+});
+
 Meteor.startup(() => {
+
   FutureRides.find().forEach(function (ride) {
     if (ride.date < new Date()) {
       //call function that pings api to request ride
