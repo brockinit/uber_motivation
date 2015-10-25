@@ -2,6 +2,7 @@
 // if you import this on the server, it will be the real method
 // use Meteor.call as normal to consume it.
 /* global Meteor */
+import {Users, Posts, FutureRides} from 'collections';
 
 Meteor.methods({
   //sanity check function
@@ -49,12 +50,14 @@ Meteor.methods({
   //method for adding ride to FutureRides collection or
   //  calling ride if time has arrived
   scheduleRide(details) {
-    if (details.date < new Date()) {
-      //function that pings uber api to request ride (boots/manny)
+    console.log(details.date);
+    if (details.date <= new Date()) {
+      console.log('woooo');
     } else {
       //insert ride info into FutureRides collection
-      var thisId = FutureRides.insert(details);
-      addRide(thisId, details);
+      console.log('bootsnpants');
+      // var thisId = FutureRides.insert(details);
+      // Meteor.call('addRide', thisId, details);
     }
     return true;
   }
