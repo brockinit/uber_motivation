@@ -19,6 +19,11 @@ export default class Calendar extends Component {
     scheduler.locale.labels.section_time = 'Date and Time';
 
     scheduler.attachEvent('onBeforeLightbox', function () {
+      if (!Meteor.user().profile) {
+        Meteor.call('getAuthorizeUrl', function(err, res) {
+          window.location = res;
+        });
+      }
       $('.dhx_section_time select:gt(3)').hide();
       $('.dhx_section_time span').remove();
       return true;
@@ -61,6 +66,10 @@ export default class Calendar extends Component {
       { name : 'end', height : 50, map_to : 'endAddress', type : 'textarea', focus : true },
       { name : 'time', height : 72, type : 'time', map_to : 'auto' }
     ];
+
+    $('#login-buttons').on('click', '#login-buttons-logout', function() {
+      FlowRouter.go('/login');
+    });
   }
 
   render() {
@@ -70,7 +79,7 @@ export default class Calendar extends Component {
 
     let schedulerStyles = {
       width : '100%',
-      height : '500px'
+      height : '700px'
     };
 
     return (

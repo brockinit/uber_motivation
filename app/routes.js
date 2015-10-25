@@ -18,6 +18,10 @@ Meteor.startup(function () {
     }
   }
 
+  Accounts.onLogin(function() {
+    FlowRouter.go('/calendar');
+  });
+
   FlowRouter.route('/', {
     triggersEnter: [checkLoggedIn],
     action: function() {
@@ -55,7 +59,9 @@ Meteor.startup(function () {
       localStorage['auth_token'] = queryParams.code;
       console.log(localStorage);
       console.log('Params',params);
-      FlowRouter.go('/calendar');
+      Meteor.call('getAccessToken', localStorage.auth_token, function(err, result){
+        FlowRouter.go('/calendar');
+      });
       // console.log('queryParams', queryParams);
       // ReactDOM.render(<Calendar />, document.getElementById('root'));
     },

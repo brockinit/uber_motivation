@@ -19,10 +19,6 @@ export default class App extends Component {
     };
   }
 
-  handleAuth() {
-    return window.open('https://login.uber.com/oauth/v2/authorize?client_id=eVsjM4L5repfO6oBG3ibyFXZMbeRtx2F&response_type=code&scope=request%20profile');
-  }
-
   render() {
     let _Template = typeof (Template) === 'function' ? Template : {
       loginButtons : 'any'
