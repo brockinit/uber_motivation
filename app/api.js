@@ -26,11 +26,39 @@ Meteor.methods({
       response_type: 'code'
     });
   },
-  // sayHello() {
-  // return 'Hello from Meteor method!';
-  // },
-  // uberAutho() {
-  //   var Future = Npm.require('fibers/future');
+  getAccessToken(authCode) {
+    // var Future = Npm.require('fibers/future');
+    // var future = new Future();
+    HTTP.call('POST', 'https://login.uber.com/oauth/v2/token', {
+      params: {
+        client_secret: uberClientSecret,
+        client_id: uberClientID,
+        grant_type: 'authorization_code',
+        redirect_uri: serverUrl + '/api/oauth/cb',
+        code: authCode
+      }
+    }, function(err, result) {
+      console.log(result.data);
+        if(!err);
+        Meteor.users.update(Meteor.userId(), {
+          $set: {
+            'profile.uberAccessToken': result.data.access_token,
+            'profile.token_type': result.data.token_type,
+            'profile.expiration': result.data.expires_in,
+            'profile.refresh_token': result.data.refresh_token,
+            'profile.profile_history': result.data.scope
+        }}, null, function(err, numAffected){
+          if(err) throw err;
+        });
+    });
+  }
+
+
+    //   if(!err);
+    //   future.return(result);
+    // });
+    // return future.wait();
+    //   var Future = Npm.require('fibers/future');
   //   var future = new Future();
   //   // window.open('https://login.uber.com/oauth/v2/authorize');
   //   HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
@@ -46,4 +74,6 @@ Meteor.methods({
   //   return future.wait();
   // },
 });
+
+
 

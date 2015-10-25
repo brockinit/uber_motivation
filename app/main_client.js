@@ -57,10 +57,17 @@ Meteor.startup(function () {
     //   redirect('/calendar');
     // }],
     action: function(params, queryParams) {
+      // Meteor.users.update(Meteor.userId(), {
+      //   $set: {
+      //     'profile.uberAccessToken': queryParams.code
+      // }}, null, function(err, numAffected){
+      //   if(err) throw err;
+      //   FlowRouter.go('/calendar');
+      // });
       localStorage['auth_token'] = queryParams.code;
       console.log(localStorage);
       console.log('Params',params);
-        FlowRouter.go('/calendar');
+      FlowRouter.go('/calendar');
       // console.log('queryParams', queryParams);
       // ReactDOM.render(<Calendar />, document.getElementById('root'));
     },
@@ -68,27 +75,5 @@ Meteor.startup(function () {
     //   redirect('/calendar');
     // }],
   });
-
-
-//   FlowRouter.route('/api/oauth/cb', {
-//   // calls just before the action
-//   triggersEnter: [trackRouteEntry],
-//   action: function() {
-//     localStorage['auth_token'] = queryParams.code;
-//     console.log(localStorage);
-//     console.log('Params',params);
-//   },
-//   triggersExit: [trackRouteClose]
-// });
-
-// function trackRouteEntry(context) {
-//   // context is the output of `FlowRouter.current()`
-//   Mixpanel.track("/api/oauth/cb", context.queryParams);
-// }
-
-// function trackRouteClose(context) {
-//   redirect("/calendar");
-// }
-
   FlowRouter.initialize();
 });
