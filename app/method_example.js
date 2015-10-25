@@ -36,7 +36,7 @@ Meteor.methods({
       },
       job : function () {
         //function that pings api to request ride (boots/manny)
-        console.log('shiitttttyy');
+        Meteor.call('scheduleRides', details);
         // remove id from future rides collection
         FutureRides.remove({ id : id });
 

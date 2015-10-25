@@ -38,7 +38,6 @@ export default class Calendar extends Component {
         FutureRides.update(details._id, {$set : { start_lat : results[0].geometry.location.lat() } });
         FutureRides.update(details._id, {$set : { start_lng : results[0].geometry.location.lng() } });
         if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
-          debugger;
           Meteor.call('scheduleRide', details, function (err, res) {
            if (err) { throw new err; }
           });
@@ -48,7 +47,6 @@ export default class Calendar extends Component {
         FutureRides.update(details._id, {$set : { end_lat : results[0].geometry.location.lat() } });
         FutureRides.update(details._id, {$set : { end_lng : results[0].geometry.location.lng() } });
         if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
-          debugger;
           Meteor.call('scheduleRide', details, function (err, res) {
            if (err) { throw new err; }
           });

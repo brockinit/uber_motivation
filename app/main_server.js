@@ -30,17 +30,17 @@ FutureRides.allow({
 
 Meteor.startup(() => {
 
-  // FutureRides.find().forEach(function (ride) {
-  //   if (ride.date < new Date()) {
-  //     //call function that pings api to request ride
-  //   } else {
-  //     //populate the FutureRides collection on start
-  //     Meteor.call('addRide', ride._id, ride, function (err, res) {
-  //       if (err) { throw err; }
-  //       console.log(res);
-  //     });
-  //   }
-  // });
+  FutureRides.find().forEach(function (ride) {
+    if (ride.date < new Date()) {
+      //call function that pings api to request ride
+    } else {
+      //populate the FutureRides collection on start
+      Meteor.call('addRide', ride._id, ride, function (err, res) {
+        if (err) { throw err; }
+        console.log(res);
+      });
+    }
+  });
   //start the cron
   SyncedCron.start();
 });
