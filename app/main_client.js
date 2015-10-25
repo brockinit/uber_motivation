@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import App from './components/App.jsx';
 import Login from './components/Login.jsx';
 import Calendar from './components/Calendar.jsx';
-import {Posts, FutureRides, Tasks} from 'collections';
+import {FutureRides, Tasks} from 'collections';
 import URL from 'url';
 
 Accounts.ui.config({
@@ -12,7 +12,6 @@ Accounts.ui.config({
 
 console.log('Running on client only');
 
-Meteor.subscribe('posts');
 Meteor.subscribe('FutureRides');
 Meteor.subscribe('tasks');
 

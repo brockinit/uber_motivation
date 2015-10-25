@@ -1,15 +1,14 @@
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
 import BlazeTemplate from './BlazeTemplate';
-import {Users, Posts, FutureRides} from 'collections';
+import {Users, FutureRides} from 'collections';
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Login extends Component {
 
   getMeteorData() {
     return {
-      users : Users.find().fetch(),
-      posts : Posts.find().fetch()
+      users : Users.find().fetch()
     };
   }
 
@@ -19,22 +18,12 @@ export default class Login extends Component {
       loginButtons : 'any'
     };
     let userCount = Users.find().fetch().length;
-    let postsCount = Posts.find().fetch().length;
-    let listPosts = this.data.posts.map((post, index) => {
-      return (
-        <li>
-          {post.name} - {post.desc}
-        </li>
-      )
-    });
 
     return (
       <div className="Login">
         <BlazeTemplate template={_Template.loginButtons} />
         <h1>Hello Webpack!</h1>
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
-        <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
-        {listPosts}
       </div>
     );
   }

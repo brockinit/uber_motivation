@@ -2,7 +2,7 @@
 // if you import this on the server, it will be the real method
 // use Meteor.call as normal to consume it.
 /* global Meteor */
-import {Users, Posts, FutureRides} from 'collections';
+import {Users, FutureRides} from 'collections';
 
 Meteor.methods({
   //sanity check function
