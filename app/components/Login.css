@@ -1,0 +1,80 @@
+.login-buttons-dropdown-align- {
+  float: right;
+  text-align: right;
+  margin-right: 10px;
+  font-weight: 300;
+  letter-spacing: 1px;
+}
+
+.login-link-text {
+  display: block;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  text-transform: capitalize;
+  font-size: 20px;
+  cursor: pointer;
+  transform: translateX(-99px);
+  transition: transform 0.2s ease-out;
+}
+
+.login-link-text:last-child {
+  transform: translateX(0);
+}
+
+
+.login-close-text, .login-close-text-clear, .login-button, #login-username-label-and-input, #login-password-label-and-input, .additional-link-container {
+  display: block;
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+#login-username-label-and-input, #login-old-password {
+  margin-bottom: 20px;
+}
+
+#login-password-again-label-and-input {
+  margin-top: 20px;
+  margin-bottom: 5px;
+}
+
+input[type="text"], input[type="password"] {
+  padding: 5px 5px;
+  font-size: 16px;
+}
+
+.login-button-form-submit, #login-buttons-logout {
+  margin-top: 15px;
+  margin-bottom: 25px;
+  padding: 10px 20px;
+  border-radius: 3px;
+  display: inline-block;
+  border: 1px solid #1FBAD6;
+  width: 140px;
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 14px;
+  color: #1FBAD6;
+  transition: background 0.2s ease-out, color 0.2s ease-out;
+}
+
+.login-button-form-submit:hover, #login-buttons-logout:hover {
+  background: #1FBAD6;
+  color: #fff;
+}
+
+.login-form label {
+  margin-right: 5px;
+}
+
+.login-close-text {
+  display: inline-block;
+  position: absolute;
+  top: 20px;
+  right: 0;
+  transform: translateX(-20px);
+}
+
+.error-message {
+  color: #CE1414;
+}
+
