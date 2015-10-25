@@ -19,6 +19,10 @@ export default class App extends Component {
     };
   }
 
+  handleAuth() {
+    return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
+  }
+
   render() {
     // Template does not suppor server side
     let _Template = typeof (Template) === 'function' ? Template : {
@@ -41,6 +45,7 @@ export default class App extends Component {
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
         {listPosts}
+        <button onClick={this.handleAuth} className='autho'>Authorize</button>
       </div>
     );
   }
