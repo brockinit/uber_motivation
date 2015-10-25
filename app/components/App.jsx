@@ -18,23 +18,18 @@ export default class App extends Component {
     };
   }
 
-  handleAuth() {
-    return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
-  }
-
   render() {
     let _Template = typeof (Template) === 'function' ? Template : {
       loginButtons : 'any'
     };
 
-    let userCount = Users.find().fetch().length;
-
     return (
       <div className='App'>
         <BlazeTemplate template={_Template.loginButtons} />
-        <h1>Hello Webpack!</h1>
-        <p>There are {userCount} users in the Minimongo  (login to change)</p>
-        <button onClick={this.handleAuth} className='autho'>Authorize</button>
+        <h1 className='absolute-center'>
+          Motivate <br/>
+          <small>Make Dat Money, Honey.</small>
+        </h1>
       </div>
     );
   }
