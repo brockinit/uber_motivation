@@ -50,12 +50,14 @@ Meteor.methods({
   //method for adding ride to FutureRides collection or
   //  calling ride if time has arrived
   scheduleRide(details) {
+    console.log(details.date);
     if (details.date <= new Date()) {
       console.log('woooo');
     } else {
       //insert ride info into FutureRides collection
-      var thisId = FutureRides.insert(details);
-      Meteor.call('addRide', thisId, details);
+      console.log('bootsnpants');
+      // var thisId = FutureRides.insert(details);
+      // Meteor.call('addRide', thisId, details);
     }
     return true;
   }
