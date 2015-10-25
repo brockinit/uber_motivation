@@ -2,6 +2,7 @@
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
 import {Users, FutureRides} from 'collections';
+import BlazeTemplate from './BlazeTemplate';
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Calendar extends Component {
@@ -63,12 +64,18 @@ export default class Calendar extends Component {
   }
 
   render() {
+    let _Template = typeof (Template) === 'function' ? Template : {
+      loginButtons : 'any'
+    };
+
     let schedulerStyles = {
       width : '100%',
       height : '500px'
     };
+
     return (
       <div className="Calendar">
+        <BlazeTemplate template={_Template.loginButtons} />
         <div id="scheduler_here" className="dhx_cal_container" style={schedulerStyles}>
             <div className="dhx_cal_navline">
             <div className="dhx_cal_prev_button">&nbsp;</div>

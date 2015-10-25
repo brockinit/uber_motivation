@@ -28,7 +28,7 @@
   cursor: pointer;
 }
 
-#login-username-label-and-input {
+#login-username-label-and-input, #login-old-password {
   margin-bottom: 20px;
 }
 
