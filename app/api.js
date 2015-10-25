@@ -6,11 +6,12 @@ let uberClientID = config.UBER_CLIENT_ID;
 let uberClientSecret = config.UBER_CLIENT_SECRET;
 let uberServerToken = config.UBER_SERVER_TOKEN;
 let serverUrl = config.HOST + ':' + config.PORT;
+console.log(serverUrl);
 
 let oauth2 = new OAuth2.OAuth2 (
   uberClientID,
   uberClientSecret,
-  'https://login.uber',
+  'https://login.uber.com/',
   'oauth/authorize',
   'oauth/token',
   null);

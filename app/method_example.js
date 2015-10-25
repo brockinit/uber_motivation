@@ -6,25 +6,25 @@ import {Users, Posts, FutureRides} from 'collections';
 
 Meteor.methods({
   //sanity check function
-  sayHello() {
-    return 'Hello from Meteor method!';
-  },
-  uberAutho() {
-    var Future = Npm.require('fibers/future');
-    var future = new Future();
-    // window.open('https://login.uber.com/oauth/v2/authorize');
-    HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
-      params: {
-        response_type: 'code',
-        client_id: 'cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8'
-      },
-    }, function(err, result) {
-      if(!err) console.log('authorize');
-      console.log(result);
-      future.return(result);
-    });
-    return future.wait();
-  },
+  // sayHello() {
+  //   return 'Hello from Meteor method!';
+  // },
+  // uberAutho() {
+  //   var Future = Npm.require('fibers/future');
+  //   var future = new Future();
+  //   // window.open('https://login.uber.com/oauth/v2/authorize');
+  //   HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
+  //     params: {
+  //       response_type: 'code',
+  //       client_id: 'cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8'
+  //     },
+  //   }, function(err, result) {
+  //     if(!err) console.log('authorize');
+  //     console.log(result);
+  //     future.return(result);
+  //   });
+  //   return future.wait();
+  // },
   //method for scheduling uber ride.
   //  needs to be linked to calendar
   addRide(id, details) {
