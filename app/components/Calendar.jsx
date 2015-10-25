@@ -1,19 +1,18 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
-import {Users, Posts, FutureRides} from 'collections';
-
+import {Users, FutureRides} from 'collections';
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Calendar extends Component {
   getMeteorData() {
     return {
-      users : Users.find().fetch(),
-      posts : Posts.find().fetch()
+      users : Users.find().fetch()
     };
   }
 
   componentDidMount() {
+
     scheduler.init('scheduler_here', new Date());
     scheduler.meteor(FutureRides.find({}), FutureRides);
     scheduler.locale.labels.section_time = 'Date and Time';
@@ -24,20 +23,41 @@ export default class Calendar extends Component {
       return true;
     });
 
+    var geocoder = new google.maps.Geocoder();
     scheduler.attachEvent('onEventSave', function (id, e) {
       scheduler.getEvent(id).userId = Meteor.userId();
       scheduler.updateEvent(id);
-      let details = scheduler.getEvent(id);
-      console.log(details, 'details');
-      Meteor.call('scheduleRide', details, function (err, res) {
-       if (err) { throw new err; }
-        console.log(res);
+      let details = FutureRides.findOne({ 'id' : id });
+      geocoder.geocode({'address' :scheduler.getEvent(id).startAddress}, function (results, status) {
+        FutureRides.update(details._id, {$set : { start_lat : results[0].geometry.location.lat() } });
+        FutureRides.update(details._id, {$set : { start_lng : results[0].geometry.location.lng() } });
+        if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
+          debugger;
+          Meteor.call('scheduleRide', details, function (err, res) {
+           if (err) { throw new err; }
+          });
+        }
+      });
+      geocoder.geocode({'address' : scheduler.getEvent(id).endAddress}, function (results, status) {
+        FutureRides.update(details._id, {$set : { end_lat : results[0].geometry.location.lat() } });
+        FutureRides.update(details._id, {$set : { end_lng : results[0].geometry.location.lng() } });
+        if (details.start_lat && details.start_lng && details.end_lat && details.end_lng) {
+          debugger;
+          Meteor.call('scheduleRide', details, function (err, res) {
+           if (err) { throw new err; }
+          });
+        }
       });
       return true;
     });
 
+
+    scheduler.locale.labels.section_start = 'Start Address';
+    scheduler.locale.labels.section_end = 'End Address';
+
     scheduler.config.lightbox.sections = [
-      { name : 'text', height : 50, map_to : 'text', type : 'textarea', focus : true },
+      { name : 'start', height : 50, map_to : 'startAddress', type : 'textarea', focus : true },
+      { name : 'end', height : 50, map_to : 'endAddress', type : 'textarea', focus : true },
       { name : 'time', height : 72, type : 'time', map_to : 'auto' }
     ];
   }

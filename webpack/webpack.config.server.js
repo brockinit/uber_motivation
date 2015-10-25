@@ -29,6 +29,10 @@ module.exports = {
         test: /\.css$/,
         loader: 'null-loader'
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
     ],
   },
 };

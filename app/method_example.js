@@ -2,7 +2,7 @@
 // if you import this on the server, it will be the real method
 // use Meteor.call as normal to consume it.
 /* global Meteor */
-import {Users, Posts, FutureRides} from 'collections';
+import {Users, FutureRides} from 'collections';
 
 Meteor.methods({
   //sanity check function
@@ -53,7 +53,7 @@ Meteor.methods({
   scheduleRide(details) {
     if (details.start_date <= new Date()) {
       //ping api
-      console.log('woooo');
+      // console.log('woooo');
     } else {
       //insert ride info into FutureRides collection
       console.log('bootsnpants');
