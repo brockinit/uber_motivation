@@ -50,22 +50,26 @@ Meteor.methods({
     });
   },
   scheduleRides() {
-  HTTP.call('POST', 'https://sandbox-api.uber.com/v1/requests', {
-    headers : {
-      'Authorization': 'Bearer ' + Meteor.user().profile.uberAccessToken
-    },
-    json : uberRequest,
-    strictSSL: false
-  });
+    HTTP.call('POST', 'https://sandbox-api.uber.com/v1/requests', {
+      'headers' : {
+        'Authorization': 'Bearer ' + Meteor.user().profile.uberAccessToken,
+        'Content-Type': 'application/json'
+      },
+      'data' : {
+        'product_id' : '821415d8-3bd5-4e27-9604-194e4359a449',
+        'start_latitude' : 37.7759792,
+        'start_longitude' : -122.41823,
+        'end_latitude' : 19.8967662,
+        'end_longitude' : -155.58278180000002
+      },
+      'strictSSL' : false
+    }, function(err, res) {
+      if(err) throw err;
+      console.log(res);
+      return res;
+    });
   }
 });
 
 // Meteor.call('getAuthorizeUrl', function(err, result){console.log(result)})
 // Meteor.call('getAccessToken', localStorage.auth_token, function(err, result){console.log(result)})
-// json : {
-//   product: 821415d8-3bd5-4e27-9604-194e4359a449,
-//   start_latitude: 37.7759792,
-//   start_longitude: -122.41823,
-//   end_latitude: 19.8967662,
-//   end_longitude: -155.58278180000002
-// }
