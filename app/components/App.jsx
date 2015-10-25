@@ -1,9 +1,10 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
-import './App.css';
 import BlazeTemplate from './BlazeTemplate';
 import {Users, FutureRides} from 'collections';
+import './App.css';
+import './Login.css';
 
 //sanity check function
 Meteor.call('sayHello', function(err, res) {
