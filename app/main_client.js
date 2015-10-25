@@ -14,13 +14,28 @@ Meteor.subscribe('posts');
 Meteor.subscribe('FutureRides');
 
 Meteor.startup(function () {
+
+  function checkLoggedIn (ctx, redirect) {
+    if (!Meteor.userId()) {
+      redirect('/login');
+    }
+  }
+
+  function redirectIfLoggedIn (ctx, redirect) {
+    if (Meteor.userId()) {
+      redirect('/');
+    }
+  }
+
   FlowRouter.route('/', {
+    triggersEnter: [checkLoggedIn],
     action: function() {
       ReactDOM.render(<App />, document.getElementById('root'));
     }
   });
 
   FlowRouter.route('/login', {
+    triggersEnter: [redirectIfLoggedIn],
     action: function() {
       ReactDOM.render(<Login />, document.getElementById('root'));
     }
