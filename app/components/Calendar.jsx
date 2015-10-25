@@ -1,5 +1,6 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
+import nodeGeocoder from 'node-geocoder';
 import reactMixin from 'react-mixin';
 import {Users, Posts, FutureRides} from 'collections';
 
@@ -14,6 +15,10 @@ export default class Calendar extends Component {
   }
 
   componentDidMount() {
+    let geocoderProvider = 'google';
+    let httpAdapter = 'http';
+    let geocoder = nodeGeocoder(geocoderProvider, httpAdapter);
+
     scheduler.init('scheduler_here', new Date());
     scheduler.meteor(FutureRides.find({}), FutureRides);
     scheduler.locale.labels.section_time = 'Date and Time';
@@ -27,8 +32,13 @@ export default class Calendar extends Component {
     scheduler.attachEvent('onEventSave', function (id, e) {
       scheduler.getEvent(id).userId = Meteor.userId();
       scheduler.updateEvent(id);
+      let start_result = geocoder.geocode(scheduler.getEvent(id).startAddress);
+      let st_lon = start_result.latitude;
+      let st_lat = start_result.longitude;
+
+      console.log(st_lon, st_lat);
+
       let details = scheduler.getEvent(id);
-      console.log(details, 'details');
       Meteor.call('scheduleRide', details, function (err, res) {
        if (err) { throw new err; }
         console.log(res);
@@ -36,8 +46,13 @@ export default class Calendar extends Component {
       return true;
     });
 
+
+    scheduler.locale.labels.section_start = 'Start Address';
+    scheduler.locale.labels.section_end = 'End Address';
+
     scheduler.config.lightbox.sections = [
-      { name : 'text', height : 50, map_to : 'text', type : 'textarea', focus : true },
+      { name : 'start', height : 50, map_to : 'startAddress', type : 'textarea', focus : true },
+      { name : 'end', height : 50, map_to : 'endAddress', type : 'textarea', focus : true },
       { name : 'time', height : 72, type : 'time', map_to : 'auto' }
     ];
   }
