@@ -1,0 +1,11 @@
+{
+  "public": {
+    "env": "",
+    "foo": ""
+  },
+  "secret": "",
+  "UBER_CLIENT_ID": "",
+  "UBER_CLIENT_SERCRET": "",
+  "UBER_SERVER_TOKEN": "",
+
+}
