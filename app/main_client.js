@@ -7,7 +7,7 @@ import {Posts, FutureRides, Tasks} from 'collections';
 import URL from 'url';
 
 Accounts.ui.config({
-  passwordSignupFields: 'USERNAME_ONLY',
+  passwordSignupFields : 'USERNAME_ONLY',
 });
 
 console.log('Running on client only');
