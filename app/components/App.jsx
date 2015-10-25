@@ -19,6 +19,16 @@ export default class App extends Component {
     };
   }
 
+
+  handleScheduleRide() {
+    let details = { date : new Date((this.refs.dateInput).value) };
+    console.log(details);
+    Meteor.call('scheduleRide', details, function (err, res) {
+      if (err) { throw new err; }
+      console.log(res);
+    });
+  }
+
   render() {
     // Template does not suppor server side
     let _Template = typeof (Template) === 'function' ? Template : {
@@ -35,12 +45,14 @@ export default class App extends Component {
     });
 
     return (
-      <div className="App">
+      <div className='App'>
         <BlazeTemplate template={_Template.loginButtons} />
         <h1>Hello Webpack!</h1>
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
         {listPosts}
+        <input type='date' ref='dateInput'></input>
+        <button onClick={this.handleScheduleRide.bind(this)}>Schedule</button>
       </div>
     );
   }

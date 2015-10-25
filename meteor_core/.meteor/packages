@@ -22,4 +22,7 @@ ejson
 spacebars
 check
 mindfront:why-reminify
+http
+kadira:flow-router
 percolate:synced-cron
+
