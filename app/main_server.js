@@ -5,11 +5,6 @@ import {FutureRides, Tasks} from './collections';
 import './method_example';
 import './api.js';
 
-// smoke test that these are present
-Npm.require;
-Assets;
-require('fs').readFile.call;
-
 
 Meteor.publish('FutureRides', function () {
   return FutureRides.find({ userId : this.userId });
