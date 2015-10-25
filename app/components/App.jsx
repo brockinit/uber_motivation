@@ -19,6 +19,16 @@ export default class App extends Component {
     };
   }
 
+
+  handleScheduleRide() {
+    let details = (this.refs.dateInput).value;
+    console.log(details);
+    // Meteor.call('scheduleRide', details, function (err, res) {
+    //   if (err) { throw new err; }
+    //   console.log(res);
+    // });
+  }
+
   render() {
     // Template does not suppor server side
     let _Template = typeof (Template) === 'function' ? Template : {
@@ -41,6 +51,8 @@ export default class App extends Component {
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
         {listPosts}
+        <input type='text' ref='dateInput'></input>
+        <button onClick={this.handleScheduleRide.bind(this)}>Schedule</button>
       </div>
     );
   }
