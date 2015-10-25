@@ -23,15 +23,11 @@ Meteor.publish('posts', function () {
 });
 
 Meteor.publish('FutureRides', function () {
-  return FutureRides.find();
-});
-
-Meteor.publish('tasks', function() {
-  return Tasks.find();
+  return FutureRides.find({ userId : this.userId });
 });
 
 // temporary insecure allowance
-Tasks.allow({
+FutureRides.allow({
   'insert' : function (u, d) {
     return true;
   },
@@ -43,22 +39,22 @@ Tasks.allow({
   }
 });
 
-Meteor.startup(() => {
+// Meteor.startup(() => {
 
-  FutureRides.find().forEach(function (ride) {
-    if (ride.date < new Date()) {
-      //call function that pings api to request ride
-    } else {
-      //populate the FutureRides collection on start
-      Meteor.call('addRide', ride._id, ride, function (err, res) {
-        if (err) { throw err; }
-        console.log(res);
-      });
-    }
-  });
-  //start the cron
-  SyncedCron.start();
-});
+//   FutureRides.find().forEach(function (ride) {
+//     if (ride.date < new Date()) {
+//       //call function that pings api to request ride
+//     } else {
+//       //populate the FutureRides collection on start
+//       Meteor.call('addRide', ride._id, ride, function (err, res) {
+//         if (err) { throw err; }
+//         console.log(res);
+//       });
+//     }
+//   });
+//   //start the cron
+//   SyncedCron.start();
+// });
 
 
 // console.log('\n\nRunning on server only');

@@ -1,7 +1,8 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
-import {Users, Posts, FutureRides, Tasks} from 'collections';
+import {Users, Posts, FutureRides} from 'collections';
+
 
 @reactMixin.decorate(ReactMeteorData)
 export default class Calendar extends Component {
@@ -14,13 +15,32 @@ export default class Calendar extends Component {
 
   componentDidMount() {
     scheduler.init('scheduler_here', new Date());
-    scheduler.meteor(Tasks.find({}), Tasks);
- }
+    scheduler.meteor(FutureRides.find({}), FutureRides);
+    scheduler.locale.labels.section_time = 'Date and Time';
+
+    scheduler.attachEvent('onBeforeLightbox', function () {
+      $('.dhx_section_time select:gt(3)').hide();
+      $('.dhx_section_time span').remove();
+      return true;
+    });
+
+    scheduler.attachEvent('onEventCreated', function (id, e) {
+      scheduler.getEvent(id).userId = Meteor.userId();
+      scheduler.getEvent(id).end_date = null;
+      scheduler.updateEvent(id);
+      return true;
+    });
+
+    scheduler.config.lightbox.sections = [
+      { name : 'text', height : 50, map_to : 'text', type : 'textarea', focus : true },
+      { name : 'time', height : 72, type : 'time', map_to : 'auto' }
+    ];
+  }
 
   render() {
     let schedulerStyles = {
-      width: '100%',
-      height: '500px'
+      width : '100%',
+      height : '500px'
     };
     return (
       <div className="Calendar">
