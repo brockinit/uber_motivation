@@ -12,7 +12,7 @@ Meteor.methods({
   uberAutho() {
     var Future = Npm.require('fibers/future');
     var future = new Future();
-
+    // window.open('https://login.uber.com/oauth/v2/authorize');
     HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
       params: {
         response_type: 'code',

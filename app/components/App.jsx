@@ -1,9 +1,9 @@
 /* global ReactMeteorData */
 import React, {Component} from 'react';
 import reactMixin from 'react-mixin';
+import './App.css';
 import BlazeTemplate from './BlazeTemplate';
 import {Users, Posts, FutureRides} from 'collections';
-import './App.css';
 
 //sanity check function
 Meteor.call('sayHello', function(err, res) {
@@ -19,6 +19,9 @@ export default class App extends Component {
     };
   }
 
+  handleAuth() {
+    return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
+  }
 
   handleScheduleRide() {
     let details = { date : new Date((this.refs.dateInput).value) };
@@ -30,7 +33,6 @@ export default class App extends Component {
   }
 
   render() {
-    // Template does not suppor server side
     let _Template = typeof (Template) === 'function' ? Template : {
       loginButtons : 'any'
     };
@@ -51,6 +53,7 @@ export default class App extends Component {
         <p>There are {userCount} users in the Minimongo  (login to change)</p>
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
         {listPosts}
+        <button onClick={this.handleAuth} className='autho'>Authorize</button>
         <input type='date' ref='dateInput'></input>
         <button onClick={this.handleScheduleRide.bind(this)}>Schedule</button>
       </div>
