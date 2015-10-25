@@ -48,7 +48,7 @@ var config = module.exports = _.assign(_.clone(config), {
       },
       {
         test: /\.css$/,
-        loader: 'style!css',
+        loader: 'style-loader!css-loader!autoprefixer-loader?browsers=last 2 versions',
         exclude: /node_modules|lib/,
       },
       {
