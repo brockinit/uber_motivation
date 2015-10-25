@@ -51,6 +51,10 @@ var config = module.exports = _.assign(_.clone(config), {
         loader: 'style!css',
         exclude: /node_modules|lib/,
       },
+      {
+        test: /\.json$/,
+        loader: 'json-loader'
+      },
     ],
   },
   plugins: (config.plugins || []).concat([
