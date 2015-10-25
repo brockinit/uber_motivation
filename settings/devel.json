@@ -1,9 +1,0 @@
-{
-  "public": {
-    "env": "DEVEL",
-    "foo": "bar"
-  },
-  "secret": "golf1234",
-  "UBER_PUBLIC_ID": "cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8",
-  "UBER_SECRET_ID": "ZDjgnMiF5koSX-l107zvtS3fl1U_aGfBK1ixg3m5"
-}

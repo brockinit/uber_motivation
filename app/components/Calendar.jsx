@@ -24,10 +24,15 @@ export default class Calendar extends Component {
       return true;
     });
 
-    scheduler.attachEvent('onEventCreated', function (id, e) {
+    scheduler.attachEvent('onEventSave', function (id, e) {
       scheduler.getEvent(id).userId = Meteor.userId();
-      scheduler.getEvent(id).end_date = null;
       scheduler.updateEvent(id);
+      let details = scheduler.getEvent(id);
+      console.log(details, 'details');
+      Meteor.call('scheduleRide', details, function (err, res) {
+       if (err) { throw new err; }
+        console.log(res);
+      });
       return true;
     });
 

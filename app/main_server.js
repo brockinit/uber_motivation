@@ -4,6 +4,7 @@ import {Posts, FutureRides, Tasks} from './collections';
 import {createPosts, createUsers} from './fixtures';
 // we don't call this so we're just importing to initialize file
 import './method_example';
+import './api.js';
 
 // these will only run on the sever since we only 'import' them in main_server.js
 
@@ -39,22 +40,22 @@ FutureRides.allow({
   }
 });
 
-// Meteor.startup(() => {
+Meteor.startup(() => {
 
-//   FutureRides.find().forEach(function (ride) {
-//     if (ride.date < new Date()) {
-//       //call function that pings api to request ride
-//     } else {
-//       //populate the FutureRides collection on start
-//       Meteor.call('addRide', ride._id, ride, function (err, res) {
-//         if (err) { throw err; }
-//         console.log(res);
-//       });
-//     }
-//   });
-//   //start the cron
-//   SyncedCron.start();
-// });
+  FutureRides.find().forEach(function (ride) {
+    if (ride.date < new Date()) {
+      //call function that pings api to request ride
+    } else {
+      //populate the FutureRides collection on start
+      Meteor.call('addRide', ride._id, ride, function (err, res) {
+        if (err) { throw err; }
+        console.log(res);
+      });
+    }
+  });
+  //start the cron
+  SyncedCron.start();
+});
 
 
 // console.log('\n\nRunning on server only');

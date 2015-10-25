@@ -12,7 +12,7 @@ Meteor.methods({
   uberAutho() {
     var Future = Npm.require('fibers/future');
     var future = new Future();
-    // window.open('https://login.uber.com/oauth/v2/authorize');
+
     HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
       params: {
         response_type: 'code',
@@ -31,13 +31,14 @@ Meteor.methods({
     SyncedCron.add({
       name : id,
       schedule : function (parser) {
-        return parser.recur().on(details.date).fullDate();
+        console.log(parser);
+        return parser.recur().on(details.start_date).fullDate();
       },
       job : function () {
         //function that pings api to request ride (boots/manny)
-
+        console.log('shiitttttyy');
         // remove id from future rides collection
-        FutureRides.remove(id);
+        FutureRides.remove({ id : id });
 
         // remove id from synced cron
         SyncedCron.remove(id);
@@ -50,14 +51,14 @@ Meteor.methods({
   //method for adding ride to FutureRides collection or
   //  calling ride if time has arrived
   scheduleRide(details) {
-    console.log(details.date);
-    if (details.date <= new Date()) {
+    if (details.start_date <= new Date()) {
+      //ping api
       console.log('woooo');
     } else {
       //insert ride info into FutureRides collection
       console.log('bootsnpants');
-      // var thisId = FutureRides.insert(details);
-      // Meteor.call('addRide', thisId, details);
+      var thisId = details.id.toString();
+      Meteor.call('addRide', thisId, details);
     }
     return true;
   }

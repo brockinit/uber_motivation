@@ -23,19 +23,11 @@ export default class App extends Component {
     return window.open('https://login.uber.com/oauth/v2/authorize?response_type=code&client_id=cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8&scope=profile');
   }
 
-  handleScheduleRide() {
-    let details = { date : new Date((this.refs.dateInput).value) };
-    console.log(details);
-    Meteor.call('scheduleRide', details, function (err, res) {
-      if (err) { throw new err; }
-      console.log(res);
-    });
-  }
-
   render() {
     let _Template = typeof (Template) === 'function' ? Template : {
       loginButtons : 'any'
     };
+
     let userCount = Users.find().fetch().length;
     let postsCount = Posts.find().fetch().length;
     let listPosts = this.data.posts.map((post, index) => {
@@ -54,8 +46,6 @@ export default class App extends Component {
         <p>There are {postsCount} posts in the Minimongo  (autopublish removed)</p>
         {listPosts}
         <button onClick={this.handleAuth} className='autho'>Authorize</button>
-        <input type='date' ref='dateInput'></input>
-        <button onClick={this.handleScheduleRide.bind(this)}>Schedule</button>
       </div>
     );
   }

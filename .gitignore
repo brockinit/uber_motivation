@@ -2,3 +2,6 @@ node_modules/
 dist
 /webpack/lib
 npm-debug.log
+/settings/devel.json
+/settings/prod.json
+/settings/stage.json
