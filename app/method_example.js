@@ -16,7 +16,7 @@ Meteor.methods({
     HTTP.call('GET', 'https://login.uber.com/oauth/v2/authorize', {
       params: {
         response_type: 'code',
-        client_id: 'cyqnjSy9pgsE6xMZceAx_l-DTitHhbQ8'
+        client_id: 'aJiQrFFYU25mUcrL2jVGcysfx7OXTzi1'
       },
     }, function(err, result) {
       if(!err) console.log('authorize');
@@ -53,10 +53,9 @@ Meteor.methods({
   scheduleRide(details) {
     if (details.start_date <= new Date()) {
       //ping api
-      // console.log('woooo');
+      console.log('Within time restriction');
     } else {
       //insert ride info into FutureRides collection
-      console.log('bootsnpants');
       var thisId = details.id.toString();
       Meteor.call('addRide', thisId, details);
     }

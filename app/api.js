@@ -4,7 +4,7 @@ import OAuth2 from 'oauth';
 let uberClientID = config.UBER_CLIENT_ID;
 let uberClientSecret = config.UBER_CLIENT_SECRET;
 let uberServerToken = config.UBER_SERVER_TOKEN;
-let serverUrl = config.HOST;
+let serverUrl = config.HOST + ':' + config.PORT;
 
 let oauth2 = new OAuth2.OAuth2 (
   uberClientID,
